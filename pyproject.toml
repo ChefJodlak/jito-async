@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jito-async"
-version = "0.1.0"
+version = "0.1.1"
 description = "Async Python SDK for Jito Block Engine"
 authors = ["ChefJodlak"]
 license = "MIT"
