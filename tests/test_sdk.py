@@ -6,13 +6,29 @@ import pytest
 from aiohttp import ClientResponseError, ClientSession
 
 from jito_async import JitoConnectionError, JitoJsonRpcSDK, JitoResponseError
+from jito_async.core.sdk import DEFAULT_BLOCK_ENGINE_URL
 
 
 @pytest.fixture
 async def sdk():
     """Create a SDK instance for testing."""
-    async with JitoJsonRpcSDK("https://test-url.com") as sdk:
+    async with JitoJsonRpcSDK() as sdk:
         yield sdk
+
+
+@pytest.mark.asyncio
+async def test_default_url():
+    """Test default URL is set correctly."""
+    sdk = JitoJsonRpcSDK()
+    assert sdk.url == DEFAULT_BLOCK_ENGINE_URL
+
+
+@pytest.mark.asyncio
+async def test_custom_url():
+    """Test custom URL is set correctly."""
+    custom_url = "https://custom-url.com"
+    sdk = JitoJsonRpcSDK(url=custom_url)
+    assert sdk.url == custom_url
 
 
 @pytest.mark.asyncio
@@ -79,7 +95,7 @@ async def test_error_handling(sdk):
 @pytest.mark.asyncio
 async def test_context_manager():
     """Test context manager functionality."""
-    async with JitoJsonRpcSDK("https://test-url.com") as sdk:
+    async with JitoJsonRpcSDK() as sdk:
         assert isinstance(sdk, JitoJsonRpcSDK)
         assert sdk.session is not None
         
@@ -91,5 +107,5 @@ def test_uuid_from_env():
     test_uuid = "test-uuid"
     os.environ["TEST_UUID"] = test_uuid
     
-    sdk = JitoJsonRpcSDK("https://test-url.com", uuid_var="TEST_UUID")
+    sdk = JitoJsonRpcSDK(uuid_var="TEST_UUID")
     assert sdk.uuid_var == test_uuid 

@@ -12,6 +12,9 @@ import aiohttp
 from aiohttp import ClientSession
 
 
+DEFAULT_BLOCK_ENGINE_URL = "https://mainnet.block-engine.jito.wtf"
+
+
 class JitoError(Exception):
     """Base exception for Jito SDK errors."""
     pass
@@ -30,14 +33,14 @@ class JitoResponseError(JitoError):
 class JitoJsonRpcSDK:
     """Async client for interacting with Jito Block Engine."""
 
-    def __init__(self, url: str, uuid_var: Optional[str] = None) -> None:
+    def __init__(self, url: Optional[str] = None, uuid_var: Optional[str] = None) -> None:
         """Initialize the Jito Block Engine client.
         
         Args:
-            url: The base URL for the Block Engine API.
+            url: The base URL for the Block Engine API. Defaults to mainnet Block Engine.
             uuid_var: Optional environment variable name containing the UUID for authentication.
         """
-        self.url = url.rstrip('/')
+        self.url = (url or DEFAULT_BLOCK_ENGINE_URL).rstrip('/')
         self.uuid_var = self.__get_uuid(uuid_var) if uuid_var else None
         self.session: Optional[ClientSession] = None
 
