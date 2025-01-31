@@ -118,7 +118,7 @@ class JitoJsonRpcSDK:
         Returns:
             Dict containing the tip accounts information.
         """
-        endpoint = "/bundles"
+        endpoint = "api/v1/bundles"
         if self.uuid_var:
             endpoint += f"?uuid={self.uuid_var}"
         return await self.__send_request(endpoint=endpoint, method="getTipAccounts")
@@ -145,7 +145,7 @@ class JitoJsonRpcSDK:
         Returns:
             Dict containing the bundle statuses.
         """
-        endpoint = "/bundles"
+        endpoint = "api/v1/bundles"
         if self.uuid_var:
             endpoint += f"?uuid={self.uuid_var}"
 
@@ -161,7 +161,7 @@ class JitoJsonRpcSDK:
         Returns:
             Dict containing the response from sending the bundle.
         """
-        endpoint = "/bundles"
+        endpoint = "api/v1/bundles"
         if self.uuid_var:
             endpoint += f"?uuid={self.uuid_var}"
         return await self.__send_request(endpoint=endpoint, method="sendBundle", params=params)
@@ -175,7 +175,7 @@ class JitoJsonRpcSDK:
         Returns:
             Dict containing the inflight bundle statuses.
         """
-        endpoint = "/bundles"
+        endpoint = "api/v1/bundles"
         if self.uuid_var:
             endpoint += f"?uuid={self.uuid_var}"
 
@@ -192,7 +192,7 @@ class JitoJsonRpcSDK:
         Returns:
             Dict containing the response from sending the transaction.
         """
-        ep = "/transactions"
+        ep = "api/v1/transactions"
         query_params = []
 
         if bundle_only:
