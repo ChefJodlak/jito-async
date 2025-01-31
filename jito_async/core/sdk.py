@@ -96,7 +96,7 @@ class JitoJsonRpcSDK:
 
         try:
             async with session.post(f"{self.url}{endpoint}", headers=headers, json=data) as response:
-                await response.raise_for_status()
+                response.raise_for_status()
                 result = await response.json()
                 return {"success": True, "data": result}
 
