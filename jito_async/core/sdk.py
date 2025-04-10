@@ -12,7 +12,7 @@ import aiohttp
 from aiohttp import ClientSession
 
 
-DEFAULT_BLOCK_ENGINE_URL = "https://mainnet.block-engine.jito.wtf"
+DEFAULT_BLOCK_ENGINE_URL = "https://amsterdam.mainnet.block-engine.jito.wtf"
 
 
 class JitoError(Exception):
